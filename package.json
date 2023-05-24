@@ -7,14 +7,18 @@
   "scripts": {
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
     "cdk": "cdk",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "cdk deploy --require-approval never",
+    "bootstrap": "cdk bootstrap",
+    "destroy": "cdk destroy --require-approval never"
   },
   "devDependencies": {
-    "aws-cdk": "2.68.0",
+    "aws-cdk": "^2.68.0",
     "jest": "^29.5.0"
   },
   "dependencies": {
     "aws-cdk-lib": "2.68.0",
+    "aws-sdk": "^2.1382.0",
     "constructs": "^10.0.0"
   }
 }
