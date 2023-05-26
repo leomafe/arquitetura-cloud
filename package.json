@@ -2,7 +2,7 @@
   "name": "trabalho-final",
   "version": "0.1.0",
   "bin": {
-    "trabalho-final": "bin/trabalho-final.js"
+    "trabalho-final": "bin/conta-corrente.js"
   },
   "scripts": {
     "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",

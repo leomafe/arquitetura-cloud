@@ -1,5 +1,5 @@
 {
-  "app": "node bin/trabalho-final.js",
+  "app": "node bin/conta-corrente-stack.js",
   "watch": {
     "include": [
       "**"

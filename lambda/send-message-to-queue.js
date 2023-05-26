@@ -6,7 +6,8 @@ exports.handler = async function(event, context) {
     
     const params = {
         MessageBody: JSON.stringify({
-            info: 'Dados salvos',
+            id: event.Records[0].dynamodb.Keys.id.S,
+            valor: parseFloat(event.Records[0].dynamodb.NewImage.valor.N)
         }),
         QueueUrl: process.env.QUEUE_URL,
     };
