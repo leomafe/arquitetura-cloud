@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "61def605-f10d-44f3-89a7-34b0af1cf5d7",
+		"name": "arquitetura-software",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4966494"
+	},
+	"item": [
+		{
+			"name": "Salvar transação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCliente\":2,\r\n    \"nome\":\"Maria\",\r\n    \"tipo\":\"entrada\",\r\n    \"valor\":10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ismi4yd66i.execute-api.us-east-1.amazonaws.com/prod/contas",
+					"protocol": "https",
+					"host": [
+						"ismi4yd66i",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Saldo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ismi4yd66i.execute-api.us-east-1.amazonaws.com/prod/contas",
+					"protocol": "https",
+					"host": [
+						"ismi4yd66i",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
