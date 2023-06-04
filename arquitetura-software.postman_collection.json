@@ -56,10 +56,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://ismi4yd66i.execute-api.us-east-1.amazonaws.com/prod/contas",
+					"raw": "https://ry88w9h2a5.execute-api.us-east-1.amazonaws.com/prod/2",
 					"protocol": "https",
 					"host": [
-						"ismi4yd66i",
+						"ry88w9h2a5",
 						"execute-api",
 						"us-east-1",
 						"amazonaws",
@@ -67,7 +67,7 @@
 					],
 					"path": [
 						"prod",
-						"contas"
+						"2"
 					]
 				}
 			},
