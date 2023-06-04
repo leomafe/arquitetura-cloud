@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
+const { DynamoDB } = require('aws-sdk');
 
 exports.handler = async function(event, context) {
-    console.log('Event: ', JSON.stringify(event, null, 2));
     for (const record of event.Records) {
         const messageBody = JSON.parse(record.body);
         const codigoUltimaTransacao = messageBody.id;
@@ -9,20 +9,17 @@ exports.handler = async function(event, context) {
             
         try {
             const conta = await buscalUltimaTransacao(codigoUltimaTransacao)
-           
             const saldo = await buscaSaldoAtual(conta.idCliente);
-            let valorSaldo = 0;
+            var valorSaldo = 0;
             if (saldo != null) {
                 valorSaldo = saldo.valor;
             }
-            if (conta.tipo == 'entrada') {
+            if (conta.tipo === 'entrada') {
                 valorSaldo+=conta.valor;
             } else {
                 valorSaldo-=conta.valor
             }
-
-            
-            
+        
             if (saldo != null) {
                 var dynamodb = new AWS.DynamoDB()
                 const params = {
@@ -37,8 +34,7 @@ exports.handler = async function(event, context) {
                     ReturnValues: 'UPDATED_NEW'
                   };
     
-                  console.log('Valor: ', valorSaldo)
-
+            
                   await dynamodb.updateItem(params).promise();
                   
 
@@ -63,11 +59,15 @@ exports.handler = async function(event, context) {
     async function buscalUltimaTransacao(codigoUltimaTransacao) {
 
         try {
-            const docUltimaTransacao = new AWS.DynamoDB.DocumentClient();
-            const data = await docUltimaTransacao
-              .scan({ TableName: 'Contas' })
-              .promise();
-        
+            const docUltimaTransacao = new DynamoDB.DocumentClient();
+            const data = await docUltimaTransacao.scan({
+                TableName: 'Contas',
+                FilterExpression: 'id = :param',
+                ExpressionAttributeValues: {
+                    ':param': codigoUltimaTransacao.toString()
+                }
+            }).promise()
+            
             const conta = data.Items.find((item) => item.id === codigoUltimaTransacao);
         
             if (!conta) {
@@ -83,11 +83,15 @@ exports.handler = async function(event, context) {
 
     async function buscaSaldoAtual(idCliente) {
         try {
-            const docSaldo = new AWS.DynamoDB.DocumentClient();
-            const data = await docSaldo.scan({ TableName: 'Saldo' }).promise();
-        
+            const docClient = new DynamoDB.DocumentClient();
+            const data = await docClient.scan({
+                TableName: 'Saldo',
+                FilterExpression: 'idCliente = :param',
+                ExpressionAttributeValues: {
+                    ':param': idCliente.toString()
+                }
+            }).promise();
             const saldo = data.Items.find((item) => item.idCliente == idCliente);
-        
             return saldo || null;
           } catch (error) {
             console.error('Erro ao consultar o saldo atual:', error);
